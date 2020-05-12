@@ -1,0 +1,10 @@
+table ==> in user's database
+table name ==> post_versions 
+  columns  {
+                id(int,11,primary key), 
+                user_id(int,11,foriegn key) 
+                post_id(int,11,foriegn key), 
+                content(varchar,5000), 
+                version_number(int,11) // to store version number
+            }
+            
