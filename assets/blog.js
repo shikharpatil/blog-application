@@ -382,30 +382,40 @@ function submit_edit_comment(num)
    })
  });
 
-//  function ot create coyp of a post
-function make_post(post_id)
+//  function ot create copy of a post
+function make_copy(post_id)
 {
-  $.ajax({
-    type:'POST',
-    url:'http://localhost/blog/copy',
-    data:{post_id : post_id},
-    dataType:'json',
-    success:function(data)
-    {
-      // $("#button_operate").html(data);
-      if(data[0]=="post is copied")
-      {
-        alert("post copied successfully");
-      }
-      else
-      {
-        alert(data);
-      }
-      // window.location.reload();
-      window.location.href = 'http://localhost/blog/'+data[1];
 
+  var bool= confirm("do you want to copy")
+	  if(bool==true)
+	  {
+      $.ajax({
+        type:'POST',
+        url:'http://localhost/blog/copy',
+        data:{post_id : post_id},
+        dataType:'json',
+        success:function(data)
+        {
+          // $("#button_operate").html(data);
+          if(data[0]=="post is copied")
+          {
+            alert("post copied successfully");
+          }
+          else
+          {
+            alert(data);
+          }
+          // window.location.reload();
+          window.location.href = 'http://localhost/blog/'+data[1];
+    
+        }
+      });
+	  }
+	  else
+	  {
+        return false
     }
-  });
+  
 }
 
   // fucntion to make comments through ajax
