@@ -90,6 +90,9 @@ class Copy extends CI_Controller
                         }
                     }
                 }
+                $response[0]="post is copied";
+                $response[1]=$new_username;
+                echo json_encode($response);
             }
             else
             {
