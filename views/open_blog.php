@@ -74,7 +74,7 @@
     imageUploadParam: 'file',
 
     // Set the image upload URL.
-    imageUploadURL: '<?php echo base_url(); ?>user/upload_image',
+    imageUploadURL: '<?php echo base_url(); ?>post/upload_image',
 
     // Additional upload params.
     imageUploadParams: {id: 'froala-editor'},
@@ -149,7 +149,7 @@
         }
     }
 
-    post.open("GET","<?php echo base_url(); ?>user/get_textarea_2/"+id+"/"+blogger_id,true);
+    post.open("GET","<?php echo base_url(); ?>post/get_textarea_2/"+id+"/"+blogger_id,true);
     post.send(null);
 
     // get_editor(num);
@@ -179,7 +179,7 @@
         }
       }
   
-      post.open("GET","<?php echo base_url(); ?>user/is_locked/"+post_id+"/"+blogger_id,true);
+      post.open("GET","<?php echo base_url(); ?>post/is_locked/"+post_id+"/"+blogger_id,true);
       post.send(null); 
   }
 
@@ -201,7 +201,7 @@
         }
     }
 
-    post.open("GET","<?php echo base_url(); ?>user/cancel_edit/"+blog_post_id+"/"+blogger_id,true);
+    post.open("GET","<?php echo base_url(); ?>post/cancel_edit/"+blog_post_id+"/"+blogger_id,true);
     post.send(null);
   }
 
@@ -450,6 +450,20 @@
             </a>
           </li>
           <li class="nav-item">
+            <?php
+               foreach($userList as $row)
+               {
+                 if($row->id==$_SESSION['id'])
+                 {
+                  ?>
+                  <a class="nav-link" href="<?php echo site_url();?><?php echo $row->username ;?>/drafts">Drafts</a>
+                  <?php
+                 }
+               }
+               ?>
+               <!-- <a class="nav-link" href="<?php echo site_url();?>post/get_drafts">Drafts</a> -->
+            </li>
+          <li class="nav-item">
             <a class="nav-link" href="<?php echo site_url();?>home">Home</a>
           </li>
           <li class="nav-item">
@@ -521,7 +535,7 @@
           <hr>
 
           <!-- Post Content -->
-          <form id="editpost" action="<?php echo site_url(); ?>user/update_blog" method="post">
+          <form id="editpost" action="<?php echo site_url(); ?>post/update_blog" method="post">
               <div id="editnow"><p class="lead"><?php echo $open_blog[0]->content; ?></p></div>
               <input type="hidden" name="parent_id" value="<?php echo $open_blog[0]->id; ?>" >
               <input type="hidden" name="user_id" value="<?php echo $open_blog[0]->user_id; ?>" >

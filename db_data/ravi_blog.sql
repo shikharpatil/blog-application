@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 13, 2020 at 06:20 AM
+-- Generation Time: May 13, 2020 at 04:46 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.13
 
@@ -39,21 +39,22 @@ CREATE TABLE `blog_posts` (
   `lock_status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '1 is locked',
   `locked_user_id` int(11) NOT NULL DEFAULT 0,
   `edited_timestamp` datetime NOT NULL DEFAULT current_timestamp(),
-  `locked_timestamp` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `locked_timestamp` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `publish_status` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `blog_posts`
 --
 
-INSERT INTO `blog_posts` (`id`, `user_id`, `parent_id`, `title`, `blog_url`, `content`, `created_timestamp`, `lock_status`, `locked_user_id`, `edited_timestamp`, `locked_timestamp`) VALUES
-(1, 25, 0, '', '', '<p>ravi 123 blog<img src=\"http://localhost/ci-blog/./uploads/45dbc4616454dfb1f3fbea8e1ff86a9c00e59e5f.jpg\" style=\"width: 300px;\" class=\"fr-fic fr-dib\"></p>', '2020-04-08 14:31:54', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 25, 0, '', '', '<p>ravi&#39;S post made for fed check 123</p>', '2020-04-13 05:32:49', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, 25, 0, 'blog by ravi ', 'blog-by-ravi-v1', '<p><br><br><img src=\"http://localhost/blog/./uploads/0cee18c1a41e168c91edffc038bfb02b871243c2.png\" style=\"width: 300px;\" class=\"fr-fic fr-dib fr-fil\"></p><p><br></p><p>here is my blog</p>', '2020-04-17 13:28:51', 0, 24, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(5, 25, 4, 'blog by ravi ', 'blog-by-ravi-v2', '<p><br><br><img src=\"http://localhost/blog/./uploads/0cee18c1a41e168c91edffc038bfb02b871243c2.png\" style=\"width: 300px;\" class=\"fr-fic fr-dib fr-fil\"></p><p><br></p><p>here is my blog 1234</p>', '2020-04-22 12:58:30', 0, 0, '0000-00-00 00:00:00', '2020-04-23 12:30:46'),
-(6, 25, 5, 'blog by ravi ', 'blog-by-ravi-v3', '<p><br><br><img src=\"http://localhost/blog/./uploads/0cee18c1a41e168c91edffc038bfb02b871243c2.png\" style=\"width: 300px;\" class=\"fr-fic fr-dib fr-fil\"></p><p><br></p><p>here is my blog 1234 version 3 is created</p>', '2020-04-23 07:00:46', 0, 0, '2020-04-23 12:30:46', '2020-04-24 15:56:20'),
-(7, 25, 0, 'ravi did post with tag', 'ravi-did-post-with-tag-v1', '<p>hello hello 123 ravi qweryt</p>', '2020-04-27 09:05:51', 0, 0, '2020-04-27 14:35:51', '2020-04-27 14:35:51'),
-(8, 25, 0, 'cricket post', 'cricket-post-v1', '<p>play cricket</p>', '2020-04-27 11:34:28', 0, 0, '2020-04-27 17:04:28', '2020-04-27 17:04:28');
+INSERT INTO `blog_posts` (`id`, `user_id`, `parent_id`, `title`, `blog_url`, `content`, `created_timestamp`, `lock_status`, `locked_user_id`, `edited_timestamp`, `locked_timestamp`, `publish_status`) VALUES
+(1, 25, 0, '', '', '<p>ravi 123 blog<img src=\"http://localhost/ci-blog/./uploads/45dbc4616454dfb1f3fbea8e1ff86a9c00e59e5f.jpg\" style=\"width: 300px;\" class=\"fr-fic fr-dib\"></p>', '2020-04-08 14:31:54', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:45:30', 'published'),
+(3, 25, 0, '', '', '<p>ravi&#39;S post made for fed check 123</p>', '2020-04-13 05:32:49', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:45:30', 'published'),
+(4, 25, 0, 'blog by ravi ', 'blog-by-ravi-v1', '<p><br><br><img src=\"http://localhost/blog/./uploads/0cee18c1a41e168c91edffc038bfb02b871243c2.png\" style=\"width: 300px;\" class=\"fr-fic fr-dib fr-fil\"></p><p><br></p><p>here is my blog</p>', '2020-04-17 13:28:51', 0, 24, '0000-00-00 00:00:00', '2020-05-13 13:45:30', 'published'),
+(5, 25, 4, 'blog by ravi ', 'blog-by-ravi-v2', '<p><br><br><img src=\"http://localhost/blog/./uploads/0cee18c1a41e168c91edffc038bfb02b871243c2.png\" style=\"width: 300px;\" class=\"fr-fic fr-dib fr-fil\"></p><p><br></p><p>here is my blog 1234</p>', '2020-04-22 12:58:30', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:45:30', 'published'),
+(6, 25, 5, 'blog by ravi ', 'blog-by-ravi-v3', '<p><br><br><img src=\"http://localhost/blog/./uploads/0cee18c1a41e168c91edffc038bfb02b871243c2.png\" style=\"width: 300px;\" class=\"fr-fic fr-dib fr-fil\"></p><p><br></p><p>here is my blog 1234 version 3 is created</p>', '2020-04-23 07:00:46', 0, 0, '2020-04-23 12:30:46', '2020-05-13 13:45:30', 'published'),
+(7, 25, 0, 'ravi did post with tag', 'ravi-did-post-with-tag-v1', '<p>hello hello 123 ravi qweryt</p>', '2020-04-27 09:05:51', 0, 0, '2020-04-27 14:35:51', '2020-05-13 13:45:30', 'published'),
+(8, 25, 0, 'cricket post', 'cricket-post-v1', '<p>play cricket</p>', '2020-04-27 11:34:28', 0, 0, '2020-04-27 17:04:28', '2020-05-13 13:45:30', 'published');
 
 -- --------------------------------------------------------
 

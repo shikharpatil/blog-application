@@ -91,6 +91,20 @@
             </a>
           </li>
           <li class="nav-item">
+            <?php
+               foreach($userList as $row)
+               {
+                 if($row->id==$_SESSION['id'])
+                 {
+                  ?>
+                  <a class="nav-link" href="<?php echo site_url();?><?php echo $row->username ;?>/drafts">Drafts</a>
+                  <?php
+                 }
+               }
+               ?>
+               <!-- <a class="nav-link" href="<?php echo site_url();?>post/get_drafts">Drafts</a> -->
+            </li>
+          <li class="nav-item">
             <a class="nav-link" href="<?php echo site_url();?>home">Home</a>
           </li>
           <li class="nav-item">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 13, 2020 at 06:20 AM
+-- Generation Time: May 13, 2020 at 04:46 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.13
 
@@ -39,33 +39,34 @@ CREATE TABLE `blog_posts` (
   `lock_status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '1 is locked',
   `locked_user_id` int(11) NOT NULL DEFAULT 0,
   `edited_timestamp` datetime NOT NULL DEFAULT current_timestamp(),
-  `locked_timestamp` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `locked_timestamp` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `publish_status` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `blog_posts`
 --
 
-INSERT INTO `blog_posts` (`id`, `user_id`, `parent_id`, `title`, `blog_url`, `content`, `created_timestamp`, `lock_status`, `locked_user_id`, `edited_timestamp`, `locked_timestamp`) VALUES
-(1, 30, 0, 'froala editor options', 'froala-editor-options-v1', '<p><strong>dweg<em>gwrw</em></strong><u>berhwrh<s>ererhrh<sub>r3h3</sub></s></u>rwrhw<sup>rwrywr<span style=\"font-family: \n        Georgia,serif;\">wr</span></sup><span style=\"font-family: \n        Georgia,serif;\">hrhrhrh</span><span style=\"font-family: Verdana, Geneva, sans-serif;\">etrethet</span><span style=\"font-family: \n        Arial,Helvetica,sans-serif;\">ethethe<span style=\"font-size: \n      11px;\">erhrherh</span><span style=\"font-size: 10px;\">rwh</span><span style=\"font-size: \n      14px;\">rh35h</span><span style=\"font-size: 14px; color: rgb(250, 197, 28);\">35h35h</span><span style=\"font-size: 14px; color: rgb(250, 197, 28); background-color: rgb(65, 168, 95);\">35h3h</span></span></p>', '2020-05-08 06:55:10', 0, 0, '2020-05-08 12:25:10', '2020-05-09 19:55:28'),
-(2, 30, 0, 'just a post', 'just-a-post-v1', '<p>hererjhfjkhh;g;dfnowrgj</p>', '2020-05-06 15:25:20', 0, 0, '2020-05-06 20:55:20', '2020-05-09 20:15:54'),
-(3, 30, 0, 'john post with tag', 'john-post-with-tag-v1', '<p>hwqerpuyjsdljkbvkjs 3695</p>', '2020-04-28 06:57:40', 0, 0, '2020-04-28 12:27:40', '2020-05-11 12:55:40'),
-(7, 30, 0, 'travel post', 'travel-post-v1', '<p>i like travel</p>', '2020-04-27 12:27:53', 0, 0, '2020-04-27 17:57:53', '2020-05-11 17:50:54'),
-(8, 30, 7, 'travel post', 'travel-post-v2', '<p>i like travel 1241359up</p>', '2020-05-05 06:19:08', 0, 0, '2020-05-05 11:49:08', '2020-05-11 17:50:54'),
-(9, 30, 0, 'move check post', 'move-check-post-v1', '<p>post to check move operation</p>', '2020-05-11 12:24:21', 0, 0, '2020-05-11 17:54:21', '2020-05-11 18:06:00'),
-(10, 30, 9, 'move check post', 'move-check-post-v2', '<p>post to check move operation edited with version</p>', '2020-05-11 12:24:49', 0, 0, '2020-05-11 17:54:49', '2020-05-11 18:06:00'),
-(11, 30, 0, 'move post again', 'move-post-again-v1', '<p>move post test with versions</p>', '2020-05-11 13:36:40', 0, 0, '2020-05-11 19:06:40', '2020-05-11 19:33:58'),
-(12, 30, 11, 'move post again', 'move-post-again-v2', '<p>move post test with versions edited version</p>', '2020-05-11 13:44:06', 0, 0, '2020-05-11 19:14:06', '2020-05-11 19:33:58'),
-(13, 30, 0, 'a post with tags ', 'a-post-with-tags-v1', '<p>content of the post with tags</p>', '2020-04-25 11:43:07', 0, 0, '2020-04-25 17:13:07', '2020-05-12 12:14:49'),
-(14, 30, 13, 'a post with tags ', 'a-post-with-tags-v2', '<p>content of the post with tags version 2</p>', '2020-05-04 12:52:50', 0, 0, '2020-05-04 18:22:50', '2020-05-12 12:14:49'),
-(15, 30, 0, 'john post again', 'john-post-again-v1', '<p>hell0o i14o1idkjlhs</p>', '2020-04-28 06:54:42', 0, 0, '2020-04-28 12:24:42', '2020-05-12 12:27:05'),
-(16, 30, 15, 'john post again', 'john-post-again-v2', '<p>hell0o i14o1idkjlhs version edited</p>', '2020-05-12 06:55:06', 0, 0, '2020-05-12 12:25:06', '2020-05-12 12:27:05'),
-(17, 30, 0, 'this the url title', 'this-the-url-title-v1', '<p>blog to check post with url</p>', '2020-04-13 15:35:42', 0, 0, '0000-00-00 00:00:00', '2020-05-12 14:38:15'),
-(18, 30, 17, 'this the url title', 'this-the-url-title-v2', '<p>blog to check post with url version 2</p>', '2020-04-20 13:24:25', 0, 0, '0000-00-00 00:00:00', '2020-05-12 14:38:15'),
-(19, 30, 18, 'this the url title', 'this-the-url-title-v3', '<p>blog to check post with url version 3</p>', '2020-04-20 13:40:57', 0, 0, '0000-00-00 00:00:00', '2020-05-12 14:38:15'),
-(20, 30, 19, 'this the url title', 'this-the-url-title-v4', '<p>blog to check post with url version 4</p>', '2020-04-22 09:07:22', 0, 0, '0000-00-00 00:00:00', '2020-05-12 14:38:15'),
-(21, 30, 20, 'this the url title', 'this-the-url-title-v5', '<p>blog to check post with url version 4</p>', '2020-04-22 09:50:28', 0, 0, '0000-00-00 00:00:00', '2020-05-12 14:38:15'),
-(22, 30, 0, 'copy-just a post', 'copy-just-a-post-v1', '<p>hererjhfjkhh;g;dfnowrgj</p>', '2020-05-06 15:25:20', 0, 0, '2020-05-06 20:55:20', '2020-05-13 09:14:36');
+INSERT INTO `blog_posts` (`id`, `user_id`, `parent_id`, `title`, `blog_url`, `content`, `created_timestamp`, `lock_status`, `locked_user_id`, `edited_timestamp`, `locked_timestamp`, `publish_status`) VALUES
+(1, 30, 0, 'froala editor options', 'froala-editor-options-v1', '<p><strong>dweg<em>gwrw</em></strong><u>berhwrh<s>ererhrh<sub>r3h3</sub></s></u>rwrhw<sup>rwrywr<span style=\"font-family: \n        Georgia,serif;\">wr</span></sup><span style=\"font-family: \n        Georgia,serif;\">hrhrhrh</span><span style=\"font-family: Verdana, Geneva, sans-serif;\">etrethet</span><span style=\"font-family: \n        Arial,Helvetica,sans-serif;\">ethethe<span style=\"font-size: \n      11px;\">erhrherh</span><span style=\"font-size: 10px;\">rwh</span><span style=\"font-size: \n      14px;\">rh35h</span><span style=\"font-size: 14px; color: rgb(250, 197, 28);\">35h35h</span><span style=\"font-size: 14px; color: rgb(250, 197, 28); background-color: rgb(65, 168, 95);\">35h3h</span></span></p>', '2020-05-08 06:55:10', 0, 0, '2020-05-08 12:25:10', '2020-05-13 13:45:01', 'published'),
+(2, 30, 0, 'just a post', 'just-a-post-v1', '<p>hererjhfjkhh;g;dfnowrgj</p>', '2020-05-06 15:25:20', 0, 0, '2020-05-06 20:55:20', '2020-05-13 13:45:01', 'published'),
+(3, 30, 0, 'john post with tag', 'john-post-with-tag-v1', '<p>hwqerpuyjsdljkbvkjs 3695</p>', '2020-04-28 06:57:40', 0, 0, '2020-04-28 12:27:40', '2020-05-13 13:45:01', 'published'),
+(7, 30, 0, 'travel post', 'travel-post-v1', '<p>i like travel</p>', '2020-04-27 12:27:53', 0, 0, '2020-04-27 17:57:53', '2020-05-13 13:45:01', 'published'),
+(8, 30, 7, 'travel post', 'travel-post-v2', '<p>i like travel 1241359up</p>', '2020-05-05 06:19:08', 0, 0, '2020-05-05 11:49:08', '2020-05-13 13:45:01', 'published'),
+(9, 30, 0, 'move check post', 'move-check-post-v1', '<p>post to check move operation</p>', '2020-05-11 12:24:21', 0, 0, '2020-05-11 17:54:21', '2020-05-13 13:45:01', 'published'),
+(10, 30, 9, 'move check post', 'move-check-post-v2', '<p>post to check move operation edited with version</p>', '2020-05-11 12:24:49', 0, 0, '2020-05-11 17:54:49', '2020-05-13 13:45:01', 'published'),
+(11, 30, 0, 'move post again', 'move-post-again-v1', '<p>move post test with versions</p>', '2020-05-11 13:36:40', 0, 0, '2020-05-11 19:06:40', '2020-05-13 13:45:01', 'published'),
+(12, 30, 11, 'move post again', 'move-post-again-v2', '<p>move post test with versions edited version</p>', '2020-05-11 13:44:06', 0, 0, '2020-05-11 19:14:06', '2020-05-13 13:45:01', 'published'),
+(13, 30, 0, 'a post with tags ', 'a-post-with-tags-v1', '<p>content of the post with tags</p>', '2020-04-25 11:43:07', 0, 0, '2020-04-25 17:13:07', '2020-05-13 13:45:01', 'published'),
+(14, 30, 13, 'a post with tags ', 'a-post-with-tags-v2', '<p>content of the post with tags version 2</p>', '2020-05-04 12:52:50', 0, 0, '2020-05-04 18:22:50', '2020-05-13 13:45:01', 'published'),
+(15, 30, 0, 'john post again', 'john-post-again-v1', '<p>hell0o i14o1idkjlhs</p>', '2020-04-28 06:54:42', 0, 0, '2020-04-28 12:24:42', '2020-05-13 13:45:01', 'published'),
+(16, 30, 15, 'john post again', 'john-post-again-v2', '<p>hell0o i14o1idkjlhs version edited</p>', '2020-05-12 06:55:06', 0, 0, '2020-05-12 12:25:06', '2020-05-13 13:45:01', 'published'),
+(17, 30, 0, 'this the url title', 'this-the-url-title-v1', '<p>blog to check post with url</p>', '2020-04-13 15:35:42', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:45:01', 'published'),
+(18, 30, 17, 'this the url title', 'this-the-url-title-v2', '<p>blog to check post with url version 2</p>', '2020-04-20 13:24:25', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:45:01', 'published'),
+(19, 30, 18, 'this the url title', 'this-the-url-title-v3', '<p>blog to check post with url version 3</p>', '2020-04-20 13:40:57', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:45:01', 'published'),
+(20, 30, 19, 'this the url title', 'this-the-url-title-v4', '<p>blog to check post with url version 4</p>', '2020-04-22 09:07:22', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:45:01', 'published'),
+(21, 30, 20, 'this the url title', 'this-the-url-title-v5', '<p>blog to check post with url version 4</p>', '2020-04-22 09:50:28', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:45:01', 'published'),
+(22, 30, 0, 'copy-just a post', 'copy-just-a-post-v1', '<p>hererjhfjkhh;g;dfnowrgj</p>', '2020-05-06 15:25:20', 0, 0, '2020-05-06 20:55:20', '2020-05-13 13:45:01', 'published');
 
 -- --------------------------------------------------------
 

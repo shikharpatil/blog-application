@@ -47,6 +47,7 @@ class Dynamic_model extends CI_Model
         // `blog_url` VARCHAR(400) NOT NULL , 
         // `content` VARCHAR(5000) NOT NULL ,  
         // `created_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB; ";
+        // ALTER TABLE `blog_posts` ADD `publish_status` VARCHAR(15) NOT NULL ; 
         $query_table="CREATE TABLE `$db_name`.`blog_posts` (
             `id` int(11) NOT NULL,
             `user_id` int(11) NOT NULL,
@@ -59,6 +60,7 @@ class Dynamic_model extends CI_Model
             `locked_user_id` int(11) NOT NULL DEFAULT 0,
             `edited_timestamp` datetime NOT NULL DEFAULT current_timestamp(),
             `locked_timestamp` datetime NOT NULL DEFAULT current_timestamp(),
+            `publish_status` VARCHAR(15) NOT NULL,
             PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         $query = $this->db_dynamic->query($query_table);
         // return $query->result();
@@ -165,13 +167,35 @@ class Dynamic_model extends CI_Model
             return 0;
         }
     }
+
+    // function to create drafts table
+    public function create_drafts_tbl($db_data)
+    {
+        $this->db_dynamic=$this->get_database($db_data);
+        $db_name=$db_data["db_name"];
+        $query_drafts="CREATE TABLE `$db_name`.`drafts` ( `id` INT(11) NOT NULL AUTO_INCREMENT , 
+        `user_id` INT(11) NOT NULL , `parent_id` INT(11) NOT NULL DEFAULT '0' , 
+        `title` VARCHAR(150) NOT NULL , `blog_url` VARCHAR(400) NOT NULL , 
+        `content` VARCHAR(5000) NOT NULL , `created_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+        `lock_status` TINYINT(4) NOT NULL DEFAULT '0' , `locked_user_id` INT(11) NOT NULL DEFAULT '0' , `edited_timestamp` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+        `locked_timestamp` DATETIME on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB; ";
+        $query = $this->db_dynamic->query($query_drafts);
+        if($query==1)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
     
     // get posts form user's database table WHERE `parent_id` IS NOT NULL
     public function get_posts($db_data)
     {
         $this->db_dynamic=$this->get_database($db_data);
         // $query_get="SELECT `id`,`user_id`,`parent_id`,`title`,`blog_url`,`content`,`date_time` FROM `blog_posts` ";
-        $query_get="SELECT * FROM `blog_posts` ";
+        $query_get="SELECT * FROM `blog_posts` WHERE publish_status='published' ";
 		$query = $this->db_dynamic->query($query_get);
         return $query->result();
     }
@@ -200,6 +224,30 @@ class Dynamic_model extends CI_Model
     {
         $this->db_dynamic=$this->get_database($db_data);
         return $this->db_dynamic->insert("blog_posts",$data);
+    }
+
+    // function to add post as a draft
+    public function add_post_as_draft($data,$db_data)
+    {
+        $this->db_dynamic=$this->get_database($db_data);
+        return $this->db_dynamic->insert("blog_posts",$data);
+    }
+
+    // function to get drafts post only
+    public function get_drafts_only($db_data)
+    {
+        $this->db_dynamic=$this->get_database($db_data); 
+        $query_get="SELECT * FROM `blog_posts` WHERE publish_status='draft' ORDER BY id DESC ";
+		$query = $this->db_dynamic->query($query_get);
+        return $query->result();  
+    }
+
+    // function to update drafts
+    public function update_draft($db_data,$post_id,$update_data)
+    {
+        $this->db_dynamic=$this->get_database($db_data);
+        $this->db_dynamic->where("id",$post_id);
+        return $this->db_dynamic->update("blog_posts",$update_data);
     }
 
     // function to move blog post to database

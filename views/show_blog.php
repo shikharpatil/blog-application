@@ -56,7 +56,7 @@
             {
                $.ajax({
                      type: "POST",
-                     url: '<?php echo site_url() ;?>user/save_blog',
+                     url: '<?php echo site_url() ;?>post/save_blog',
                      data: {title: title,content: content,applied_tags: applied_tags},
                      dataType: 'json',
                      success: function(data)
@@ -70,6 +70,46 @@
                       {
                         // alert('Invalid Credentials');
                         window.location.href = '<?php echo site_url();?>'+data;
+                        // document.getElementById('error').innerHTML="username or password invalid";
+                      }
+                    }
+               });
+            }
+           });
+       });
+
+       $(document).ready(function() {
+         $('#drafts').click(function(e) {
+            e.preventDefault();
+            var title=$("#title").val();
+            var content=$("#froala-editor").val();
+            var applied_tags=$("#tagsinput").val();
+            if(title.length<1)
+            {
+               document.getElementById('title_error').innerHTML="title or content empty";
+            }
+            else if(content.length<1)
+            {
+               document.getElementById('title_error').innerHTML="title or content empty";
+            }
+            else
+            {
+               $.ajax({
+                     type: "POST",
+                     url: '<?php echo site_url() ;?>post/save_as_drafts',
+                     data: {title: title,content: content,applied_tags: applied_tags},
+                     dataType: 'json',
+                     success: function(data)
+                     {
+                        if (data === 'false') 
+                        {
+                      
+                         document.getElementById('title_error').innerHTML="title already exists";
+                        }
+                      else 
+                      {
+                        // alert('Invalid Credentials');
+                        window.location.href = '<?php echo site_url();?>'+data+'/drafts';
                         // document.getElementById('error').innerHTML="username or password invalid";
                       }
                     }
@@ -141,6 +181,20 @@
                </a>
             </li>
             <li class="nav-item">
+            <?php
+               foreach($userList as $row)
+               {
+                 if($row->id==$_SESSION['id'])
+                 {
+                  ?>
+                  <a class="nav-link" href="<?php echo site_url();?><?php echo $row->username ;?>/drafts">Drafts</a>
+                  <?php
+                 }
+               }
+               ?>
+               <!-- <a class="nav-link" href="<?php echo site_url();?>post/get_drafts">Drafts</a> -->
+            </li>
+            <li class="nav-item">
                <a class="nav-link" href="<?php echo site_url();?>home">Home</a>
             </li>
             <li class="nav-item">
@@ -180,7 +234,11 @@
                     <input type="hidden" name="applied_tags" id="tagsinput" value=""/>
                     <!-- <div><input type="text" name="tags"  id="tags" class="form-control"></div> -->
                     <br/>
-                    <div><input type="submit" id="submit" class="btn btn-info" name="save" value="save"></div>
+                    <div>
+                    <input type="submit" id="submit" class="btn btn-info" name="save" value="save">
+                    <input type="submit" id="drafts" class="btn btn-info" name="save_as_drafts" value="Save as Drafts">
+                    </div>
+                    <!-- <div></div> -->
                   </form>
                 </div>
                 <!-- Author -->
@@ -240,7 +298,7 @@
                 <div class="card my-4">
                   <h5 class="card-header"><?php echo $num.")".$row[0]["created_timestamp"];?></h5>
                   <div class="card-body">
-                    <form id="editpost<?php echo $row[0]["id"] ;?>" method="post" action="<?php echo site_url(); ?>user/update_blog">
+                    <form id="editpost<?php echo $row[0]["id"] ;?>" method="post" action="<?php echo site_url(); ?>post/update_blog">
                         <div class="form-group">
                           <div id="getEditor<?php echo $num ;?>"><?php echo $row[0]["content"]; ?>
                           </div>
@@ -259,7 +317,7 @@
                         {
                             ?>
                             <!-- <a href="javascript:void(0)" class="btn btn-info" onclick="get_textarea(<?php echo $row[0]['id']; ?>,<?php echo $num; ?>)" >edit</a> -->
-                            <a href="<?php echo base_url();?>user/delete_blog/<?php echo $row[0]["id"]; ?>" class="btn btn-info" onclick="return delete_post()">delete</a>
+                            <a href="<?php echo base_url();?>post/delete_blog/<?php echo $row[0]["id"]; ?>" class="btn btn-info" onclick="return delete_post()">delete</a>
                             <?php
                         }
                       ?>
@@ -279,7 +337,7 @@
                 <div class="card my-4">
                   <h5 class="card-header"><?php echo $num.")".$row[$latest]["created_timestamp"];?></h5>
                   <div class="card-body">
-                    <form id="editpost<?php echo $row[$latest]["id"] ;?>" method="post" action="<?php echo site_url(); ?>user/update_blog">
+                    <form id="editpost<?php echo $row[$latest]["id"] ;?>" method="post" action="<?php echo site_url(); ?>post/update_blog">
                         <div class="form-group">
                           <div id="getEditor<?php echo $num ;?>"><?php echo $row[$latest]["content"]; ?>
                           </div>
@@ -298,7 +356,7 @@
                         {
                             ?>
                             <!-- <a href="javascript:void(0)" class="btn btn-info" onclick="get_textarea(<?php echo $row[$latest]['id']; ?>,<?php echo $num; ?>)" >edit</a> -->
-                            <a href="<?php echo base_url();?>user/delete_blog/<?php echo $row[$latest]["id"]; ?>" class="btn btn-info" onclick="return delete_post()">delete</a>
+                            <a href="<?php echo base_url();?>post/delete_blog/<?php echo $row[$latest]["id"]; ?>" class="btn btn-info" onclick="return delete_post()">delete</a>
                             <?php
                         }
                         // echo $version;
@@ -494,7 +552,7 @@
     imageUploadParam: 'file',
 
     // Set the image upload URL.
-    imageUploadURL: '<?php echo base_url(); ?>user/upload_image',
+    imageUploadURL: '<?php echo base_url(); ?>post/upload_image',
 
     // Additional upload params.
     imageUploadParams: {id: 'froala-editor'},
@@ -552,11 +610,45 @@
   {
 	  // new FroalaEditor('textarea#froala-editor'+num)
   new FroalaEditor('.selector'+num, {
+
+    toolbarButtons: {
+    // Key represents the more button from the toolbar.
+    moreText: {
+      // List of buttons used in the  group.
+      buttons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'textColor', 'backgroundColor', 'inlineClass', 'inlineStyle', 'clearFormatting'],
+
+      // Alignment of the group in the toolbar.
+      align: 'left',
+
+      // By default, 3 buttons are shown in the main toolbar. The rest of them are available when using the more button.
+      buttonsVisible: 13
+    },
+
+
+    moreParagraph: {
+      buttons: ['alignLeft', 'alignCenter', 'formatOLSimple', 'alignRight', 'alignJustify', 'formatOL', 'formatUL', 'paragraphFormat', 'paragraphStyle', 'lineHeight', 'outdent', 'indent', 'quote'],
+      align: 'left',
+      buttonsVisible: 10
+    },
+
+    moreRich: {
+      buttons: ['insertLink', 'insertImage', 'insertVideo', 'insertTable', 'emoticons', 'fontAwesome', 'specialCharacters', 'embedly', 'insertFile', 'insertHR'],
+      align: 'left',
+      buttonsVisible: 5
+    },
+
+    moreMisc: {
+      buttons: ['undo', 'redo', 'fullscreen', 'print', 'getPDF', 'spellChecker', 'selectAll', 'html', 'help'],
+      align: 'right',
+      buttonsVisible: 2
+    }
+  },
+
     // Set the image upload parameter.
     imageUploadParam: 'file',
 
     // Set the image upload URL.
-    imageUploadURL: '<?php echo base_url(); ?>user/upload_image',
+    imageUploadURL: '<?php echo base_url(); ?>post/upload_image',
 
     // Additional upload params.
     imageUploadParams: {id: 'froala-editor'},
@@ -626,7 +718,7 @@
         }
     }
 
-    post.open("GET","<?php echo base_url(); ?>user/get_textarea/"+id+"/"+num,true);
+    post.open("GET","<?php echo base_url(); ?>post/get_textarea/"+id+"/"+num,true);
     post.send(null);
 
     // get_editor(num);

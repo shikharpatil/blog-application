@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 13, 2020 at 06:19 AM
+-- Generation Time: May 13, 2020 at 04:47 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.13
 
@@ -39,17 +39,18 @@ CREATE TABLE `blog_posts` (
   `lock_status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '1 is locked',
   `locked_user_id` int(11) NOT NULL DEFAULT 0,
   `edited_timestamp` datetime NOT NULL DEFAULT current_timestamp(),
-  `locked_timestamp` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `locked_timestamp` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `publish_status` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `blog_posts`
 --
 
-INSERT INTO `blog_posts` (`id`, `user_id`, `parent_id`, `title`, `blog_url`, `content`, `created_timestamp`, `lock_status`, `locked_user_id`, `edited_timestamp`, `locked_timestamp`) VALUES
-(1, 24, 0, '', '', '<p>karans first blog 1</p>', '2020-04-13 08:05:02', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, 24, 1, '', '', '<p>karans first blog 1 version 2</p>', '2020-04-20 13:24:56', 0, 24, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(11, 24, 0, 'posts with tags', 'posts-with-tags-v1', '<p>inserted tags in this post , number tags 3</p>', '2020-04-25 11:20:25', 0, 0, '2020-04-25 16:50:25', '2020-04-25 16:50:25');
+INSERT INTO `blog_posts` (`id`, `user_id`, `parent_id`, `title`, `blog_url`, `content`, `created_timestamp`, `lock_status`, `locked_user_id`, `edited_timestamp`, `locked_timestamp`, `publish_status`) VALUES
+(1, 24, 0, '', '', '<p>karans first blog 1</p>', '2020-04-13 08:05:02', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:43:57', 'published'),
+(4, 24, 1, '', '', '<p>karans first blog 1 version 2</p>', '2020-04-20 13:24:56', 0, 24, '0000-00-00 00:00:00', '2020-05-13 13:43:57', 'published'),
+(11, 24, 0, 'posts with tags', 'posts-with-tags-v1', '<p>inserted tags in this post , number tags 3</p>', '2020-04-25 11:20:25', 0, 0, '2020-04-25 16:50:25', '2020-05-13 20:02:40', 'published');
 
 -- --------------------------------------------------------
 

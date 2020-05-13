@@ -159,7 +159,7 @@
     imageUploadParam: 'file',
 
     // Set the image upload URL.
-    imageUploadURL: 'http://localhost/blog/user/upload_image',
+    imageUploadURL: 'http://localhost/blog/post/upload_image',
 
     // Additional upload params.
     imageUploadParams: {id: 'froala-editor'},

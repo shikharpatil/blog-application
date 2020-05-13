@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 13, 2020 at 06:20 AM
+-- Generation Time: May 13, 2020 at 04:46 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.13
 
@@ -39,18 +39,19 @@ CREATE TABLE `blog_posts` (
   `lock_status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '1 is locked',
   `locked_user_id` int(11) NOT NULL DEFAULT 0,
   `edited_timestamp` datetime NOT NULL DEFAULT current_timestamp(),
-  `locked_timestamp` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `locked_timestamp` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `publish_status` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `blog_posts`
 --
 
-INSERT INTO `blog_posts` (`id`, `user_id`, `parent_id`, `title`, `blog_url`, `content`, `created_timestamp`, `lock_status`, `locked_user_id`, `edited_timestamp`, `locked_timestamp`) VALUES
-(2, 26, 0, 'blog with title parv', 'blog-with-title-parv-v1', '<p>1234 hello 1234</p>', '2020-04-20 15:15:18', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 26, 2, 'blog with title parv', 'blog-with-title-parv-v2', '<p>1234 hello 1234 version 2</p>', '2020-04-20 15:16:02', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, 26, 0, 'another', 'another-v1', '<p>dhfuhohfjhfiwhfhdhakhf</p>', '2020-04-20 15:23:22', 0, 0, '0000-00-00 00:00:00', '2020-05-02 21:04:55'),
-(5, 26, 4, 'another', 'another-v2', '<p>dhfuhohfjhfiwhfhdhakhfy28y4t24t2</p>', '2020-05-02 15:34:55', 0, 0, '2020-05-02 21:04:55', '2020-05-02 21:04:55');
+INSERT INTO `blog_posts` (`id`, `user_id`, `parent_id`, `title`, `blog_url`, `content`, `created_timestamp`, `lock_status`, `locked_user_id`, `edited_timestamp`, `locked_timestamp`, `publish_status`) VALUES
+(2, 26, 0, 'blog with title parv', 'blog-with-title-parv-v1', '<p>1234 hello 1234</p>', '2020-04-20 15:15:18', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:44:36', 'published'),
+(3, 26, 2, 'blog with title parv', 'blog-with-title-parv-v2', '<p>1234 hello 1234 version 2</p>', '2020-04-20 15:16:02', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:44:36', 'published'),
+(4, 26, 0, 'another', 'another-v1', '<p>dhfuhohfjhfiwhfhdhakhf</p>', '2020-04-20 15:23:22', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:44:36', 'published'),
+(5, 26, 4, 'another', 'another-v2', '<p>dhfuhohfjhfiwhfhdhakhfy28y4t24t2</p>', '2020-05-02 15:34:55', 0, 0, '2020-05-02 21:04:55', '2020-05-13 13:44:36', 'published');
 
 -- --------------------------------------------------------
 

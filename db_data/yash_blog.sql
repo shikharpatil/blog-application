@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 13, 2020 at 06:21 AM
+-- Generation Time: May 13, 2020 at 04:46 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.13
 
@@ -39,35 +39,36 @@ CREATE TABLE `blog_posts` (
   `lock_status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '1 is locked',
   `locked_user_id` int(11) NOT NULL DEFAULT 0,
   `edited_timestamp` datetime NOT NULL DEFAULT current_timestamp(),
-  `locked_timestamp` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `locked_timestamp` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `publish_status` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `blog_posts`
 --
 
-INSERT INTO `blog_posts` (`id`, `user_id`, `parent_id`, `title`, `blog_url`, `content`, `created_timestamp`, `lock_status`, `locked_user_id`, `edited_timestamp`, `locked_timestamp`) VALUES
-(1, 23, 0, '', '', '<p>yash blog poast 123 updated blog<img src=\"http://localhost/ci-blog/./uploads/7d1f2c21b6006a99bdaaa67d5283b06e5ab9b91a.jpg\" style=\"width: 300px;\" class=\"fr-fic fr-dib\"></p>', '2020-04-09 03:42:46', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 23, 0, '', '', '<p>1234 blog edit<img src=\"http://localhost/ci-blog/./uploads/b58a327aee62d232108d82ecf8c8c5bc0790afe3.png\" style=\"width: 300px;\" class=\"fr-fic fr-dib\"></p>', '2020-04-09 07:25:39', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, 23, 0, '', '', '<p>yash creates a post no 3</p>', '2020-04-10 13:25:25', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(7, 23, 0, '', '', '<p>yash post to save in memcached 1</p>', '2020-04-10 15:10:27', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(8, 23, 0, '', '', '<p>yaash post to save in memcached 2</p>', '2020-04-11 05:42:34', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(9, 23, 0, '', '', '<p>save post in emcached 134h</p>', '2020-04-11 05:50:12', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(10, 23, 0, '', '', '<p>yash post again 123yash</p>', '2020-04-11 05:57:52', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(11, 23, 0, '', '', '<p>yash post to check dadt in memcached 1234mem</p>', '2020-04-11 06:39:11', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(14, 23, 0, '', '', '<p>yash post to check key</p>', '2020-04-11 07:15:19', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(15, 23, 0, '', '', '<p>yash post again 1234566788</p>', '2020-04-11 07:16:32', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(16, 23, 0, '', '', '<p>yash again</p>', '2020-04-11 07:18:49', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(17, 23, 0, '', '', '<p>check post if occurs in feed or not</p>', '2020-04-11 10:06:33', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(18, 23, 0, '', '', '<p>check for post occures in the feed or not 2</p>', '2020-04-11 12:50:33', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(19, 23, 0, '', '', '<p>another post by yash 123</p>', '2020-04-11 13:48:05', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(20, 23, 0, '', '', '<p>yash blog with username<br><br><img src=\"http://localhost/blog/./uploads/1c5fb3d1e8c7b9f4f98811b0950b88e4f1d5a352.jpg\" style=\"width: 300px;\" class=\"fr-fic fr-dib fr-fil\"></p>', '2020-04-11 14:27:32', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(21, 23, 0, '', '', '<p>yash made a blog here 123oiuieigq&nbsp;</p>', '2020-04-13 04:37:54', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(22, 23, 0, 'yash created by blog.', 'yash-created-by-blog.', '<p>this is the blog content, hello 12345</p>', '2020-04-14 06:57:39', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(23, 23, 0, 'blog with image', 'blog-with-image', '<p><img src=\"http://localhost/blog/./uploads/ffd28febee876929d25056da51fbb86c621757fe.jpg\" style=\"width: 300px;\" class=\"fr-fic fr-dib\"></p>', '2020-04-14 07:58:23', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(24, 23, 0, 'mybblog', 'mybblog', '<p>qwertyuiopasdfghjl123098000000</p>', '2020-04-16 03:37:43', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(25, 23, 24, 'mybblog', 'mybblog', '<p>qwertyuiopasdfghjl</p>', '2020-04-18 14:00:51', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(26, 23, 22, 'yash created by blog.', 'yash-created-by-blog.', '<p>this is the blog content</p>', '2020-04-18 14:17:27', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `blog_posts` (`id`, `user_id`, `parent_id`, `title`, `blog_url`, `content`, `created_timestamp`, `lock_status`, `locked_user_id`, `edited_timestamp`, `locked_timestamp`, `publish_status`) VALUES
+(1, 23, 0, '', '', '<p>yash blog poast 123 updated blog<img src=\"http://localhost/ci-blog/./uploads/7d1f2c21b6006a99bdaaa67d5283b06e5ab9b91a.jpg\" style=\"width: 300px;\" class=\"fr-fic fr-dib\"></p>', '2020-04-09 03:42:46', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published'),
+(3, 23, 0, '', '', '<p>1234 blog edit<img src=\"http://localhost/ci-blog/./uploads/b58a327aee62d232108d82ecf8c8c5bc0790afe3.png\" style=\"width: 300px;\" class=\"fr-fic fr-dib\"></p>', '2020-04-09 07:25:39', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published'),
+(4, 23, 0, '', '', '<p>yash creates a post no 3</p>', '2020-04-10 13:25:25', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published'),
+(7, 23, 0, '', '', '<p>yash post to save in memcached 1</p>', '2020-04-10 15:10:27', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published'),
+(8, 23, 0, '', '', '<p>yaash post to save in memcached 2</p>', '2020-04-11 05:42:34', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published'),
+(9, 23, 0, '', '', '<p>save post in emcached 134h</p>', '2020-04-11 05:50:12', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published'),
+(10, 23, 0, '', '', '<p>yash post again 123yash</p>', '2020-04-11 05:57:52', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published'),
+(11, 23, 0, '', '', '<p>yash post to check dadt in memcached 1234mem</p>', '2020-04-11 06:39:11', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published'),
+(14, 23, 0, '', '', '<p>yash post to check key</p>', '2020-04-11 07:15:19', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published'),
+(15, 23, 0, '', '', '<p>yash post again 1234566788</p>', '2020-04-11 07:16:32', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published'),
+(16, 23, 0, '', '', '<p>yash again</p>', '2020-04-11 07:18:49', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published'),
+(17, 23, 0, '', '', '<p>check post if occurs in feed or not</p>', '2020-04-11 10:06:33', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published'),
+(18, 23, 0, '', '', '<p>check for post occures in the feed or not 2</p>', '2020-04-11 12:50:33', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published'),
+(19, 23, 0, '', '', '<p>another post by yash 123</p>', '2020-04-11 13:48:05', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published'),
+(20, 23, 0, '', '', '<p>yash blog with username<br><br><img src=\"http://localhost/blog/./uploads/1c5fb3d1e8c7b9f4f98811b0950b88e4f1d5a352.jpg\" style=\"width: 300px;\" class=\"fr-fic fr-dib fr-fil\"></p>', '2020-04-11 14:27:32', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published'),
+(21, 23, 0, '', '', '<p>yash made a blog here 123oiuieigq&nbsp;</p>', '2020-04-13 04:37:54', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published'),
+(22, 23, 0, 'yash created by blog.', 'yash-created-by-blog.', '<p>this is the blog content, hello 12345</p>', '2020-04-14 06:57:39', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published'),
+(23, 23, 0, 'blog with image', 'blog-with-image', '<p><img src=\"http://localhost/blog/./uploads/ffd28febee876929d25056da51fbb86c621757fe.jpg\" style=\"width: 300px;\" class=\"fr-fic fr-dib\"></p>', '2020-04-14 07:58:23', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published'),
+(24, 23, 0, 'mybblog', 'mybblog', '<p>qwertyuiopasdfghjl123098000000</p>', '2020-04-16 03:37:43', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published'),
+(25, 23, 24, 'mybblog', 'mybblog', '<p>qwertyuiopasdfghjl</p>', '2020-04-18 14:00:51', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published'),
+(26, 23, 22, 'yash created by blog.', 'yash-created-by-blog.', '<p>this is the blog content</p>', '2020-04-18 14:17:27', 0, 0, '0000-00-00 00:00:00', '2020-05-13 13:46:16', 'published');
 
 -- --------------------------------------------------------
 

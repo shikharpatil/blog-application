@@ -49,7 +49,7 @@
           <hr>
 
           <!-- Post Content -->
-          <form id="editpost" action="<?php echo site_url(); ?>user/update_blog" method="post">
+          <form id="editpost" action="<?php echo site_url(); ?>post/update_blog" method="post">
               <div id="editnow"><p class="lead"><?php echo $open_blog[0]->content; ?></p></div>
               <input type="hidden" name="parent_id" value="<?php echo $open_blog[0]->id; ?>" >
               <input type="hidden" name="user_id" value="<?php echo $open_blog[0]->user_id; ?>" >
